@@ -36,7 +36,7 @@ void	execute_builtin(t_shell *ms, t_cmd *cmd)
 	else if (!ft_strncmp(cmd->args[0], "unset", 6))
         ms->last_exit_st = 1;//exec_unset(ms, cmd);
 	else if (!ft_strncmp(cmd->args[0], "env", 4))
-        ms->last_exit_st = 1;//exec_env(ms, cmd);
+        ms->last_exit_st = exec_env(ms);
 	else if (!ft_strncmp(cmd->args[0], "exit", 5))
         exec_exit(ms, cmd);
 	else

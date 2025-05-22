@@ -215,10 +215,14 @@ int		ft_isnum(char *str);
 void	free_exit(t_shell *ms);
 void	exec_exit(t_shell *ms, t_cmd *cmd);
 
-//EXEC_ECHO.C
+// EXEC_ECHO.C
 
 int		ft_check_flag(char *s);
 int		exec_echo(t_shell *ms);
+
+// EXEC_ENV.C
+
+int		exec_env(t_shell *shell);
 
 
 #endif
