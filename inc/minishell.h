@@ -147,7 +147,7 @@ void	ft_update_join(t_token **lst);
 
 // MAIN.C
 
-void	ft_minishell(t_shell *shell, char **env);
+void	ft_minishell(t_shell *shell);
 
 // PROCESS_REDIRECTION.C //
 
@@ -188,15 +188,15 @@ void	ft_tokenize(t_shell *shell);
 
 void    ft_check_exitstat(int status, t_shell *ms);
 void	execute_builtin(t_shell *ms, t_cmd *cmd);
-void    child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms, char **envp[]);
+void    child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms);
 void    parent_process(pid_t pid, t_shell *ms, int *prevfd, int pipefd[2]);
-void    ft_exec_commands(t_shell *ms, char **envp[]);
+void    ft_exec_commands(t_shell *ms);
 
 // EXECUTER_COMMAND.C
 
 void	free_paths(char **paths, int i);
 char	*ft_path(char *path, char **comm);
-void	execute_command(t_cmd *cmd, char **env);
+void	execute_command(t_shell *shell, t_cmd *cmd);
 
 // REDIRECTIONS.C
 

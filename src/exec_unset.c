@@ -16,8 +16,8 @@ char	**ft_remove_env(char **env, char *str)
 	j = 0;
 	while (env[i])
 	{
-		key = ft_get_key(str);
-		if (!ft_strcmp(key,str) != 0)
+		key = ft_get_key(env[i]);
+		if (ft_strcmp(key,str) != 0)
 			new[j++] = ft_strdup(env[i]);
 		free(key);
 		i++;

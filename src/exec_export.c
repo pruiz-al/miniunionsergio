@@ -125,5 +125,4 @@ int	exec_export(t_shell *shell, t_cmd *cmd)
 	return (0);
 }
 
-//añade bien el nuevo env pero cuando vuelvo a usar el ejecutor y pongo el comando env ya no lo añade, problema al pasar shell->env
 //shel->exit_status o last_exist_st?

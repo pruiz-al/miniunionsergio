@@ -13,4 +13,3 @@ int	exec_env(t_shell *shell)
 	}
 	return (0);
 }
-//aquí tengo que ponerle que imprima esto _=/usr/bin/env? o vale con los env que tengan un '='?

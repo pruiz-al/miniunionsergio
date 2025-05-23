@@ -43,7 +43,7 @@ void	execute_builtin(t_shell *ms, t_cmd *cmd)
 		return ;
 }
 
-void    child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms, char **envp[])
+void    child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms)
 {
     if (prevfd != -1)
         dup2(prevfd, STDIN_FILENO);
@@ -64,7 +64,7 @@ void    child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms, char *
         exit(ms->last_exit_st);
     }
     else
-        execute_command(cmd, *envp);
+        execute_command(ms, cmd);
     perror("Error executing\n");
     exit (126);
 }
@@ -90,7 +90,7 @@ void    parent_process(pid_t pid, t_shell *ms, int *prevfd, int pipefd[2])
 //LOS BUILTINS SOLO SE FORKEAN CUANDO HAY PIPELINE
 //TRATAR DISTINTO UN COMANDO SOLO Y LAS PIPES
 
-void    ft_exec_commands(t_shell *ms, char **envp[])
+void    ft_exec_commands(t_shell *ms)
 {
     pid_t   pid;
     int     pipefd[2];
@@ -101,6 +101,11 @@ void    ft_exec_commands(t_shell *ms, char **envp[])
     prevfd = -1;
     while (cmd)
     {
+        if (cmd->is_btn && !cmd->next && (prevfd == -1))
+        {
+            execute_builtin(ms, cmd);
+            return ;
+        }
         if (cmd->next && pipe(pipefd) == 1)
         {
             perror("Error creating pipe\n");
@@ -113,7 +118,9 @@ void    ft_exec_commands(t_shell *ms, char **envp[])
             exit(1);
         }
         if (pid == 0)
-            child_process(cmd, prevfd, pipefd, ms, envp);
+        {
+            child_process(cmd, prevfd, pipefd, ms);
+        }
         else
         {
             parent_process(pid, ms, &prevfd, pipefd);

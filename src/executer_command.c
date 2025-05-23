@@ -42,12 +42,14 @@ char	*ft_path(char *path, char **comm)
 	return (0);
 }
 
-void	execute_command(t_cmd *cmd, char **env)
+void	execute_command(t_shell *shell, t_cmd *cmd)
 {
 	int		i;
 	char	*path;
+	char	**env;
 
 	i = 0;
+	env = shell->env;
 	if (!cmd->args || !cmd->args[0])
 	{
 		ft_putstr_fd("Error: empty command\n", 2);
