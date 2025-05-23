@@ -32,9 +32,9 @@ void	execute_builtin(t_shell *ms, t_cmd *cmd)
 	else if (!ft_strncmp(cmd->args[0], "pwd", 4))
         ms->last_exit_st = exec_pwd();
 	else if (!ft_strncmp(cmd->args[0], "export", 7))
-        ms->last_exit_st = 1;//exec_export(ms, cmd);
+        ms->last_exit_st = exec_export(ms, cmd);
 	else if (!ft_strncmp(cmd->args[0], "unset", 6))
-        ms->last_exit_st = 1;//exec_unset(ms, cmd);
+        ms->last_exit_st = exec_unset(ms, cmd);
 	else if (!ft_strncmp(cmd->args[0], "env", 4))
         ms->last_exit_st = exec_env(ms);
 	else if (!ft_strncmp(cmd->args[0], "exit", 5))

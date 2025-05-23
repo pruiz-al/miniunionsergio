@@ -4,53 +4,16 @@ int	ft_check_env(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (!str || !ft_isalpha(str[0]) ||str[0] != '_')
+	if (!str || (!ft_isalpha(str[0]) && str[0] != '_'))
 		return (0);
+	i = 1;
 	while (str[i] && str[i] != '=')
 	{
-		if (str[i] != '_' && ft_isalnum(str[i]))
+		if (str[i] != '_' && !ft_isalnum(str[i]))
 			return (0);
 		i++;
 	}
 	return (1);
-}
-
-int	ft_search_env(char **env, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if(!ft_strncmp(env[i], name, ft_strlen(name)) && env[i][ft_strlen(name)] == '=')
-			return (i);
-		i++;
-	}
-	return -1;
-}
-
-char	*ft_get_key(char *str)
-{
-	int		i;
-	char	*key;
-
-	i = 0;
-	key = ft_strdup(str);
-	while (key[i] && key[i] != '=')
-		i++;
-	key[i] = '\0';
-	return (key);
-}
-
-int	ft_size_env(char **env)
-{
-	int	i;
-
-	i = 0;
-	while(env && env[i])
-		i++;
-	return (i);
 }
 
 char	**ft_add_modify_env(char **env, char *str)
@@ -70,20 +33,40 @@ char	**ft_add_modify_env(char **env, char *str)
 		env[index] = ft_strdup(str);
 		return (env);
 	}
-	size = ft_size_env(env);
-	new = ft_malloc(sizeof(char *) * (size + 2));
+	size = ft_size_matrix(env);
+	new = malloc(sizeof(char *) * (size + 2));
 	if (!new)
 		return (NULL);
 	i = 0;
 	while (i < size)
 	{
-		new[i] = env[i];
+		new[i] = ft_strdup(env[i]);
 		i++;
 	}
-	new[i] = ft_strdup(str);
-	new[i+1] = NULL;
-	free(env);
+	new[i++] = ft_strdup(str);
+	new[i] = NULL;
+	ft_free_matrix(env);
 	return (new);
+}
+
+void	ft_sort_matrix(char **matrix)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (matrix[j])
+	{
+		i = 0;
+		while (matrix[i + 1])
+		{
+			if (ft_strcmp(matrix[i], matrix[i + 1])> 0)
+				ft_swap(&matrix[i], &matrix[i + 1]);
+			i++;
+		}
+		j++;
+	}
 }
 
 void	ft_print_export(char **env)
@@ -92,10 +75,15 @@ void	ft_print_export(char **env)
 	int		i;
 	char	*equal;
 
+	if (!env)
+		return ;
 	new_env = ft_copy_env(env);
+	if (!new_env)
+		return ;
 	ft_sort_matrix(new_env);
 	i = 0;
-	while (new_env[y])
+
+	while (new_env[i])
 	{
 		equal = ft_strchr(new_env[i], '=');
 		if (!equal)
@@ -108,7 +96,7 @@ void	ft_print_export(char **env)
 		}
 		i++;
 	}
-	ft_free_matrix(new);
+	ft_free_matrix(new_env);
 }
 
 int	exec_export(t_shell *shell, t_cmd *cmd)
@@ -126,7 +114,7 @@ int	exec_export(t_shell *shell, t_cmd *cmd)
 		if (!ft_check_env(cmd->args[i]))
 		{
 			printf("minishell: export: %s: not a valid identifier\n", cmd->args[i]);
-			ms->exit_status = 1;
+			shell->exit_status = 1;
 		}
 		else
 		{
@@ -136,3 +124,6 @@ int	exec_export(t_shell *shell, t_cmd *cmd)
 	}
 	return (0);
 }
+
+//añade bien el nuevo env pero cuando vuelvo a usar el ejecutor y pongo el comando env ya no lo añade, problema al pasar shell->env
+//shel->exit_status o last_exist_st?

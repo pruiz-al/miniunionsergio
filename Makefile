@@ -10,7 +10,10 @@ CFILES =	src/check_syntax.c \
 			src/exec_echo.c \
 			src/exec_env.c \
 			src/exec_exit.c \
+			src/exec_export_utils.c \
+			src/exec_export.c \
 			src/exec_pwd.c \
+			src/exec_unset.c \
 			src/executer_command.c \
 			src/executer.c \
 			src/expand_exitstatus.c \

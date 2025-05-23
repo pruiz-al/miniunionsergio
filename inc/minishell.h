@@ -224,5 +224,25 @@ int		exec_echo(t_shell *ms);
 
 int		exec_env(t_shell *shell);
 
+// EXEC_EXPORT.C
+
+int		ft_check_env(char *str);
+char	**ft_add_modify_env(char **env, char *str);
+void	ft_sort_matrix(char **matrix);
+void	ft_print_export(char **env);
+int		exec_export(t_shell *shell, t_cmd *cmd);
+
+// EXEC_EXPORT_UTILS.C
+int	ft_search_env(char **env, char *str);
+char	*ft_get_key(char *str);
+int		ft_size_matrix(char **env);
+void	ft_swap(char **s1, char **s2);
+int		ft_strcmp_order(const char *s1, const char *s2);
+
+// EXEC_UNSET.C
+
+char	**ft_remove_env(char **env, char *str);
+int		exec_unset(t_shell *shell, t_cmd *cmd);
+
 
 #endif
