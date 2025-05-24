@@ -7,6 +7,7 @@ CFILES =	src/check_syntax.c \
 			src/clean2.c \
 			src/commands_utils.c \
 			src/dequotize.c \
+			src/exec_cd.c \
 			src/exec_echo.c \
 			src/exec_env.c \
 			src/exec_exit.c \

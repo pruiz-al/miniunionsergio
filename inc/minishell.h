@@ -244,5 +244,13 @@ int		ft_strcmp_order(const char *s1, const char *s2);
 char	**ft_remove_env(char **env, char *str);
 int		exec_unset(t_shell *shell, t_cmd *cmd);
 
+// EXEC_CD.C
+
+char	*ft_get_env(char **env, char *str);
+int	cd_path(t_shell *shell, char *path);
+int	cd_home(t_shell *shell);
+int	cd_oldpwd(t_shell *shell);
+int	exec_cd(t_shell *shell, t_cmd *cmd);
+
 
 #endif

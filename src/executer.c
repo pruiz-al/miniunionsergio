@@ -28,7 +28,7 @@ void	execute_builtin(t_shell *ms, t_cmd *cmd)
     if (!ft_strncmp(cmd->args[0], "echo", 5))
         ms->last_exit_st = exec_echo(ms);
     else if (!ft_strncmp(cmd->args[0], "cd", 3))
-        ms->last_exit_st = 1;//exec_cd(ms, cmd);
+        ms->last_exit_st = exec_cd(ms, cmd);
 	else if (!ft_strncmp(cmd->args[0], "pwd", 4))
         ms->last_exit_st = exec_pwd();
 	else if (!ft_strncmp(cmd->args[0], "export", 7))
