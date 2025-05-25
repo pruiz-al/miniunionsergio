@@ -21,6 +21,7 @@ CFILES =	src/check_syntax.c \
 			src/expand_utils.c \
 			src/expand_var.c \
 			src/get_commands.c \
+			src/heredoc_utils.c \
 			src/init_shell.c \
 			src/list_utils.c \
 			src/main.c \

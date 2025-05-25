@@ -200,10 +200,16 @@ void	execute_command(t_shell *shell, t_cmd *cmd);
 
 // REDIRECTIONS.C
 
-int		ft_redir_heredoc(t_cmd *cmd);
+int		ft_redir_heredoc(t_shell *shell, t_cmd *cmd);
 int 	ft_redir_infile(char *infile);
 int 	ft_redir_outfile(char *outfile, int append);
-int		ft_redirections(t_cmd *cmd);
+int		ft_redirections(t_shell *shell, t_cmd *cmd);
+
+// HEREDOC_UTILS.C
+
+char	*ft_expand_variable(int *i, char *buffer, char **env);
+char	*ft_not_expand(int *i, char *buffer);
+char	*ft_expand_heredoc(char *buffer, char **env);
 
 // EXEC_PWD.C
 
@@ -233,7 +239,7 @@ void	ft_print_export(char **env);
 int		exec_export(t_shell *shell, t_cmd *cmd);
 
 // EXEC_EXPORT_UTILS.C
-int	ft_search_env(char **env, char *str);
+int		ft_search_env(char **env, char *str);
 char	*ft_get_key(char *str);
 int		ft_size_matrix(char **env);
 void	ft_swap(char **s1, char **s2);
@@ -246,11 +252,10 @@ int		exec_unset(t_shell *shell, t_cmd *cmd);
 
 // EXEC_CD.C
 
-char	*ft_get_env(char **env, char *str);
-int	cd_path(t_shell *shell, char *path);
-int	cd_home(t_shell *shell);
-int	cd_oldpwd(t_shell *shell);
-int	exec_cd(t_shell *shell, t_cmd *cmd);
+int		cd_path(t_shell *shell, char *path);
+int		cd_home(t_shell *shell);
+int		cd_oldpwd(t_shell *shell);
+int		exec_cd(t_shell *shell, t_cmd *cmd);
 
 
 #endif

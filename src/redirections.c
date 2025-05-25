@@ -12,10 +12,11 @@
 
 #include "../inc/minishell.h"
 
-int	ft_redir_heredoc(t_cmd *cmd)
+int	ft_redir_heredoc(t_shell *shell, t_cmd *cmd)
 {
 	int		pipefd[2];
 	char	*buffer;
+
 	if (pipe(pipefd) == -1)
 	{
 		perror("Error pipe\n");
@@ -29,6 +30,7 @@ int	ft_redir_heredoc(t_cmd *cmd)
 			free(buffer);
 			break;
 		}
+		buffer = ft_expand_heredoc(buffer, shell->env);
 		write(pipefd[1], buffer, ft_strlen(buffer));
 		write(pipefd[1], "\n", 1);
 		free(buffer);
@@ -84,11 +86,11 @@ int ft_redir_outfile(char *outfile, int append)
 	return (0);
 }
 
-int	ft_redirections(t_cmd *cmd)
+int	ft_redirections(t_shell *shell, t_cmd *cmd)
 {
-	if (cmd->hd == 1 && ft_redir_heredoc(cmd))
+	if (cmd->hd && ft_redir_heredoc(shell, cmd))
 		return (1);
-    if (cmd->hd == 0 && cmd->infile && ft_redir_infile(cmd->infile))
+    if (!cmd->hd && cmd->infile && ft_redir_infile(cmd->infile))
         return (1);
     if (cmd->outfile && ft_redir_outfile(cmd->outfile, cmd->append))
         return (1);

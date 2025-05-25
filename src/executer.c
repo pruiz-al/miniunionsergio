@@ -45,7 +45,9 @@ void	execute_builtin(t_shell *ms, t_cmd *cmd)
 
 void    child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms)
 {
-    if (prevfd != -1)
+	if (ft_redirections(ms, cmd) == 1)
+		exit (1);
+	if (prevfd != -1)
         dup2(prevfd, STDIN_FILENO);
     if (cmd->next)
         dup2(pipefd[1], STDOUT_FILENO);
@@ -56,8 +58,8 @@ void    child_process(t_cmd *cmd, int prevfd, int pipefd[2], t_shell *ms)
         close(pipefd[0]);
         close(pipefd[1]);
     }
-    if (ft_redirections(cmd) == 1)
-        exit (1);
+//    if (ft_redirections(ms, cmd) == 1)
+//        exit (1);
     if (cmd->is_btn)
     {
         execute_builtin(ms, cmd);

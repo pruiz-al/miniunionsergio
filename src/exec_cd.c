@@ -1,19 +1,5 @@
 #include "../inc/minishell.h"
 
-char	*ft_get_env(char **env, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (env && env[i])
-	{
-		if(!ft_strncmp(env[i], str, ft_strlen(str)) && env[i][ft_strlen(str)] == '=')
-			return (&env[i][ft_strlen(str) + 1]);
-		i++;
-	}
-	return NULL;
-}
-
 int	cd_path(t_shell *shell, char *path)
 {
 	char	*oldpwd;
@@ -45,7 +31,7 @@ int	cd_home(t_shell *shell)
 {
 	char	*home;
 
-	home = ft_get_env(shell->env, "HOME");
+	home = ft_getenv(shell->env, "HOME");
 	if (!home)
 	{
 		printf("minishell: cd: HOME not set\n");
@@ -59,7 +45,7 @@ int	cd_oldpwd(t_shell *shell)
 {
 	char	*oldpwd;
 
-	oldpwd = ft_get_env(shell->env, "OLDPWD");
+	oldpwd = ft_getenv(shell->env, "OLDPWD");
 	if (!oldpwd)
 	{
 		printf("minishell: cd: OLDPWD not set\n");
