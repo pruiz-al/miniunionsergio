@@ -20,7 +20,7 @@ int	ft_search_env(char **env, char *str)
 	while (env && env[i])
 	{
 		if (!ft_strncmp(env[i], str, ft_strlen(str))
-			&& env[i][ft_strlen(str)] == '=')
+			&& (env[i][ft_strlen(str)] == '=' || env[i][ft_strlen(str)] == '\0'))
 			return (i);
 		i++;
 	}

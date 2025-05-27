@@ -132,5 +132,3 @@ valid identifier\n", cmd->args[i]);
 	}
 	return (0);
 }
-
-//shel->exit_status o last_exist_st?
