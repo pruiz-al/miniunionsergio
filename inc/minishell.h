@@ -257,5 +257,11 @@ int		cd_home(t_shell *shell);
 int		cd_oldpwd(t_shell *shell);
 int		exec_cd(t_shell *shell, t_cmd *cmd);
 
+// EXEC_CD_UTILS.C
+
+int		ft_check_errors(t_shell *shell, char *oldpwd, char *path);
+int		ft_update_pwd(t_shell *shell, char *oldpwd, char *pwd);
+int		ft_check_home_error(t_shell *shell, char *home, char *oldpwd);
+void	ft_update_home(t_shell *shell, char *oldpwd, char *pwd);
 
 #endif
