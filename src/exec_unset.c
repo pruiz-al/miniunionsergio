@@ -14,12 +14,15 @@
 
 char	**ft_remove_env(char **env, char *str)
 {
-	char	*key;
+	int		index;
 	int		size;
 	char	**new;
 	int		i;
 	int		j;
 
+	index = ft_search_env(env, str);
+	if (index == -1)
+		return (env);
 	size = ft_size_matrix(env);
 	new = malloc(sizeof(char *) * size);
 	if (!new)
@@ -28,10 +31,8 @@ char	**ft_remove_env(char **env, char *str)
 	j = 0;
 	while (env[i])
 	{
-		key = ft_get_key(env[i]);
-		if (ft_strcmp(key, str) != 0)
+		if (i != index)
 			new[j++] = ft_strdup(env[i]);
-		free(key);
 		i++;
 	}
 	new[j] = NULL;
