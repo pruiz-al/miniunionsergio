@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:06:30 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/07 13:11:18 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:21:12 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@ void	ft_free_cmd_args(t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	if (cmd->args)
+	if (!cmd->args)
+		return ;
+	while (cmd->args[i])
 	{
-		while (cmd->args[i])
-			free(cmd->args[i++]);
-		free(cmd->args);
+		free(cmd->args[i]);
+		cmd->args[i] = NULL;
+		i++;
 	}
+	free(cmd->args);
+	cmd->args = NULL;
 }
 
 void	ft_free_cmd_files(t_cmd *cmd)

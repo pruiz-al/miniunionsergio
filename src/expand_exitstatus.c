@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 19:45:43 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/13 19:09:03 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/27 12:31:30 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,28 @@ void	ft_expand_exitstatus(t_shell *shell, t_token *token)
 	char	*result;
 	char	*dollar_pos;
 	int		pos;
+	int		i;
 
-	int i = -1;//	LOOPEAMOS AHORA EL $? TAMBIEN
+	i = -1;
 	while (token->tkn[++i] && ft_strchr(token->tkn, '$')
 		&& token->tkn[ft_intstrchr(token->tkn, '$')] != ' '
 		&& token->tkn[ft_intstrchr(token->tkn, '$')] != '\"')
+	{
+		dollar_pos = ft_strnstr(token->tkn, "$?", ft_strlen(token->tkn));
+		if (!dollar_pos)
+			return ;
+		status_str = ft_itoa(shell->last_exit_st);
+		if (!status_str)
+			return ;
+		pos = dollar_pos - token->tkn;
+		if (pos == 0)
+			ft_replace_start(&token->tkn, status_str, dollar_pos);
+		else
 		{
-			dollar_pos = ft_strnstr(token->tkn, "$?", ft_strlen(token->tkn));
-			if (!dollar_pos)
-				return ;
-			status_str = ft_itoa(shell->last_exit_st);
-			if (!status_str)
-				return ;
-			pos = dollar_pos - token->tkn;
-			if (pos == 0)
-				ft_replace_start(&token->tkn, status_str, dollar_pos);
-			else
-			{
-				result = ft_middle_case(token->tkn, dollar_pos, status_str);
-				free(token->tkn);
-				token->tkn = result;
-			}
-			free(status_str);
+			result = ft_middle_case(token->tkn, dollar_pos, status_str);
+			free(token->tkn);
+			token->tkn = result;
 		}
+		free(status_str);
+	}
 }

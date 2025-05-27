@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_export_utils.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 12:23:11 by sbenitez          #+#    #+#             */
+/*   Updated: 2025/05/27 12:24:25 by sbenitez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int	ft_search_env(char **env, char *str)
@@ -7,11 +19,12 @@ int	ft_search_env(char **env, char *str)
 	i = 0;
 	while (env && env[i])
 	{
-		if(!ft_strncmp(env[i], str, ft_strlen(str)) && env[i][ft_strlen(str)] == '=')
+		if (!ft_strncmp(env[i], str, ft_strlen(str))
+			&& env[i][ft_strlen(str)] == '=')
 			return (i);
 		i++;
 	}
-	return -1;
+	return (-1);
 }
 
 char	*ft_get_key(char *str)
@@ -32,7 +45,7 @@ int	ft_size_matrix(char **env)
 	int	i;
 
 	i = 0;
-	while(env && env[i])
+	while (env && env[i])
 		i++;
 	return (i);
 }

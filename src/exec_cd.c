@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_cd.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 12:04:06 by sbenitez          #+#    #+#             */
+/*   Updated: 2025/05/27 12:05:37 by sbenitez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int	cd_path(t_shell *shell, char *path)
@@ -58,12 +70,12 @@ int	cd_oldpwd(t_shell *shell)
 
 int	exec_cd(t_shell *shell, t_cmd *cmd)
 {
-    char	*path;
+	char	*path;
 
-    path = cmd->args[1];
-    if (!path || !ft_strcmp_order(path, "~"))
-		return cd_home(shell);
+	path = cmd->args[1];
+	if (!path || !ft_strcmp_order(path, "~"))
+		return (cd_home(shell));
 	if (!ft_strcmp_order(path, "-"))
-		return cd_oldpwd(shell);
-	return cd_path(shell, path);
+		return (cd_oldpwd(shell));
+	return (cd_path(shell, path));
 }

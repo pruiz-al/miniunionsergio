@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executer_command.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 12:28:22 by sbenitez          #+#    #+#             */
+/*   Updated: 2025/05/27 13:14:00 by sbenitez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 void	free_paths(char **paths, int i)
@@ -29,7 +41,7 @@ char	*ft_path(char *path, char **comm)
 		tmp = ft_strjoin(paths[i], "/");
 		route = ft_strjoin(tmp, *comm);
 		free(tmp);
-		if(access(route, F_OK | X_OK) == 0)
+		if (access(route, F_OK | X_OK) == 0)
 		{
 			free_paths(paths, i);
 			return (route);
@@ -53,6 +65,11 @@ void	execute_command(t_shell *shell, t_cmd *cmd)
 	if (!cmd->args || !cmd->args[0])
 	{
 		ft_putstr_fd("Error: empty command\n", 2);
+		exit (127);
+	}
+	if (cmd->args[0][0] == '\0')
+	{
+		ft_putstr_fd("minishell: command '' not found\n", 2);
 		exit (127);
 	}
 	while (env[i] && ft_strnstr(env[i], "PATH", 4) == 0)

@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 18:16:26 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/13 19:43:57 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/27 12:32:27 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	ft_expand_token(t_shell *shell, t_token *token)
 		&& token->tkn[ft_intstrchr(token->tkn, '$')] != ' '
 		&& token->tkn[ft_intstrchr(token->tkn, '$')] != '\"')
 	{
-
 		xpnd->start = ft_intstrchr(token->tkn, '$');
 		if (token->tkn[xpnd->start] == '?')
 		{
@@ -114,12 +113,7 @@ void	ft_expand_var(t_shell *shell)
 	while (temp)
 	{
 		if (temp->expand == true)
-		{
-			//if (ft_strnstr(temp->tkn, "$?", ft_strlen(temp->tkn)))
-			//else
-//			ft_expand_exitstatus(shell, temp);
 			ft_expand_token(shell, temp);
-		}
 		temp = temp->next;
 	}
 }

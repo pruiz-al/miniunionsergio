@@ -6,7 +6,7 @@
 /*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:22:07 by sbenitez          #+#    #+#             */
-/*   Updated: 2025/05/19 17:22:28 by sbenitez         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:01:32 by sbenitez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_check_flag(char *s)
 	return (i > 1);
 }
 
-int	exec_echo(t_shell *shell)
+int	do_echo(t_shell *shell)
 {
 	int	i;
 	int	nl_flag;
@@ -55,4 +55,17 @@ int	exec_echo(t_shell *shell)
 	if (nl_flag)
 		printf("\n");
 	return (0);
+}
+
+int	exec_echo(t_shell *shell)
+{
+	int	fd;
+	int	ret;
+
+	fd = dup(STDOUT_FILENO);
+	if (shell->cmd_lst->outfile)
+		ft_redir_outfile(shell->cmd_lst->outfile, shell->cmd_lst->append);
+	ret = do_echo(shell);
+	dup2(fd, STDOUT_FILENO);
+	return (ret);
 }

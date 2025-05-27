@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 12:33:31 by sbenitez          #+#    #+#             */
+/*   Updated: 2025/05/27 12:33:46 by sbenitez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 char	*ft_expand_variable(int *i, char *buffer, char **env)
@@ -14,7 +26,7 @@ char	*ft_expand_variable(int *i, char *buffer, char **env)
 	value = ft_getenv(env, var);
 	free(var);
 	if (!value)
-		return(ft_strdup(""));
+		return (ft_strdup(""));
 	return (value);
 }
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_exit.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbenitez <sbenitez@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 12:06:24 by sbenitez          #+#    #+#             */
+/*   Updated: 2025/05/27 12:07:34 by sbenitez         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/minishell.h"
 
 int	ft_isnum(char *str)
@@ -31,7 +43,7 @@ void	exec_exit(t_shell *ms, t_cmd *cmd)
 	{
 		if (!ft_isnum(cmd->args[1]))
 		{
-			printf("minishel: exit: %s: numeric argument required\n", cmd->args[1]);
+			printf("minishell: exit: %s: numeric arg required\n", cmd->args[1]);
 			free_exit(ms);
 			exit(2);
 		}
